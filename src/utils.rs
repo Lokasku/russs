@@ -1,17 +1,17 @@
 use std::fs;
 
 
-pub fn  read_file(file: &str) -> Vec<Vec<String>> {
+pub fn  read_file(file: &str) -> Vec<Vec<Option<u32>>> {
     let sdk = fs::read_to_string(file).expect("Cannot read file.");
     let sdk = sdk.split("\r\n");
     let sdk = sdk.collect::<Vec<&str>>();
 
-    let mut sdk_by_lines: Vec<Vec<String>> = vec![];
+    let mut sdk_by_lines: Vec<Vec<Option<u32>>> = vec![];
     
     for line in sdk {
-        let mut line_content: Vec<String> = vec![];
+        let mut line_content: Vec<Option<u32>> = vec![];
         for char in line.chars() {
-            line_content.push(char.to_string());}
+            line_content.push(char.to_digit(10u32));}
         sdk_by_lines.push(line_content);
     }
 
