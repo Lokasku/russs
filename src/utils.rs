@@ -1,4 +1,5 @@
 use std::fs;
+use crate::sudoku::Cell;
 
 
 pub fn  read_file(file: &str) -> Vec<Vec<Option<u32>>> {
@@ -25,4 +26,17 @@ pub fn  read_file(file: &str) -> Vec<Vec<Option<u32>>> {
         _ => panic!("Your sudoku doesnt contains 9 lines.")
     }
     sdk_by_lines
+}
+
+pub fn get_index_as(a: u32, b: u32, kind: String) -> Cell {
+    match kind.as_str() {
+        "line" => Cell {value: None, a: a, b: b},
+        "column" => Cell {value: None, a: b, b: a},
+        "square" => Cell {
+            value: None,
+            a: b / 3 + (a / 3) * 3,
+            b: b % 3 + (a % 3) * 3
+        },
+        &_ => panic!("The kind either 'line', 'column' or 'square'.")
+    }
 }
