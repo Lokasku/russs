@@ -28,8 +28,8 @@ pub fn  read_file(file: &str) -> Vec<Vec<Option<u32>>> {
     sdk_by_lines
 }
 
-pub fn get_index_as(a: u32, b: u32, kind: String) -> Cell {
-    match kind.as_str() {
+pub fn get_index_as(a: u32, b: u32, kind: &str) -> Cell {
+    match kind {
         "line" => Cell {value: None, a: a, b: b},
         "column" => Cell {value: None, a: b, b: a},
         "square" => Cell {
